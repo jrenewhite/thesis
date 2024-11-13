@@ -1,0 +1,97 @@
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Virtual environment directories
+env/
+venv/
+ENV/
+.venv/
+.env
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+.pytest_cache/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# pyenv
+.python-version
+
+# dotenv
+.env
+.env.*
+
+# Docker
+*.log
+docker-compose.override.yml
+**/Dockerfile
+
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# MacOS
+.DS_Store
+
+# Results and Data directories (ensure no sensitive data)
+data/monolitic/results/
+data/distributed/results/
+results/
+
+# Logs and databases
+*.log
+*.sqlite3
+
+# VS Code / IDE configuration files
+.vscode/
+.idea/
+
+# Temporary files and directories
+*.tmp
+*.temp
+*.bak
+~$*
+*.swp
+*~
