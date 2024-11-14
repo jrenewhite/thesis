@@ -19,6 +19,11 @@ class Trainer:
         self.logger = logging.getLogger(__name__)
         self.logger.info("Trainer initialized with configuration and system configuration")
 
+        # Set defaults for large dataset handling if not provided in the config
+
+        self.large_dataset_threshold = self.config.get('large_dataset_threshold', 50000)
+        self.sampling_ratio = self.config.get('sampling_ratio', 1.0)
+
     def train(self):
         """
         Trains classifiers and creates ensembles based on the provided configurations.
@@ -51,7 +56,9 @@ class Trainer:
                     use_feature_range=self.config['use_feature_range'],
                     feature_range=self.config['feature_range'],
                     header_present=self.syst_config['header_present'],
-                    feature_mapping_path=self.config['feature_mapping_path']
+                    feature_mapping_path=self.config['feature_mapping_path'],
+                    large_dataset_threshold=self.large_dataset_threshold,
+                    sampling_ratio=self.sampling_ratio
                 )
                 X_train, X_test, y_train, y_test = DataLoader.split_dataset(X, y, self.config['split_ratio'])
                 self.logger.info("Dataset loaded and split successfully")
@@ -65,7 +72,9 @@ class Trainer:
                     use_feature_range=self.config['use_feature_range'],
                     feature_range=self.config['feature_range'],
                     header_present=self.syst_config['header_present'],
-                    feature_mapping_path=self.config['feature_mapping_path']
+                    feature_mapping_path=self.config['feature_mapping_path'],
+                    large_dataset_threshold=self.large_dataset_threshold,
+                    sampling_ratio=self.sampling_ratio
                 )
                 X_train, X_test, y_train, y_test = DataLoader.split_dataset(X, y, self.config['split_ratio'])
                 self.logger.info("Dataset loaded and split successfully")

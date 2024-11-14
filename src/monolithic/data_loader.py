@@ -116,9 +116,9 @@ class DataLoader:
         return X_train, X_test, y_train, y_test
 
     @staticmethod
-    def load_dataset(dataset_path, feature_names, target_name, delimiter, use_feature_range, feature_range, header_present, feature_mapping_path):
+    def load_dataset(dataset_path, feature_names, target_name, delimiter, use_feature_range, feature_range, header_present, feature_mapping_path, large_dataset_threshold=100000, sampling_ratio=1.0):
         """
-        Load and preprocess the dataset.
+        Load and preprocess the dataset, with optional chunk loading for large datasets.
 
         Args:
         - dataset_path (str): Path to the dataset file.
@@ -129,6 +129,8 @@ class DataLoader:
         - feature_range (list): Range of columns to use as features.
         - header_present (bool): Indicates whether the dataset has a header row.
         - feature_mapping_path (str): Path to the feature mapping file.
+        - large_dataset_threshold (int): Row threshold above which the dataset is considered large.
+        - sampling_ratio (float): Ratio for sampling rows if dataset is too large.
 
         Returns:
         - tuple: X (features), y (target)
@@ -138,8 +140,19 @@ class DataLoader:
         column_mapping = DataLoader.create_column_mapping(feature_mapping, header_present)
         feature_types = DataLoader.create_feature_type_mapping(feature_mapping)
 
-        # Load the dataset with or without headers based on `header_present`
-        df = pd.read_csv(dataset_path, delimiter=delimiter, header=0 if header_present else None)
+        # Check the size of the dataset by loading only the first few rows
+        initial_rows = pd.read_csv(dataset_path, delimiter=delimiter, header=0 if header_present else None, nrows=10)
+        total_rows = initial_rows.shape[0]
+
+        # Determine if chunk loading is necessary
+        if total_rows > large_dataset_threshold:
+            logging.info("Dataset exceeds large dataset threshold; loading in chunks with sampling ratio: %s", sampling_ratio)
+            chunks = pd.read_csv(dataset_path, delimiter=delimiter, header=0 if header_present else None, chunksize=10000)
+            sampled_data = [chunk.sample(frac=sampling_ratio) for chunk in chunks]
+            df = pd.concat(sampled_data, ignore_index=True)
+        else:
+            df = pd.read_csv(dataset_path, delimiter=delimiter, header=0 if header_present else None)
+        
         logging.info("Dataset loaded successfully with shape %s", df.shape)
 
         # Select feature columns and target column
