@@ -13,7 +13,7 @@ def setup_logging():
     
     # Create logger
     logger = logging.getLogger()
-    logger.setLevel(logging.DEBUG)
+    logger.setLevel(logging.INFO)
 
     # Console handler for logging to console
     console_handler = logging.StreamHandler()
