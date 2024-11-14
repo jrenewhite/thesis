@@ -4,7 +4,7 @@
     "base_models": [
         "rf",
         "svm",
-        "nb",
+        "et",
         "lr"
     ],
     "num_base_models_in_each_ensemble": 3,
@@ -32,5 +32,33 @@
     "results_folder": "data/monolithic/results/dry_beans",
     "use_feature_range": false,
     "feature_range": [],
-    "feature_mapping_path": "data/monolithic/configurations/dry_beans/feature_mapping.csv"
+    "feature_mapping_path": "data/monolithic/configurations/dry_beans/feature_mapping.csv",
+    "pretrained_ensemble_path": "data/monolithic/pretrained_ensembles/dry_beans",
+    "ignore_pretrained": false,
+    "model_params": {
+        "rf": {
+            "n_estimators": 120,
+            "max_depth": 15,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "svm": {
+            "C": 0.9,
+            "kernel": "rbf",
+            "gamma": "scale",
+            "probability": true,
+            "random_state": 42
+        },
+        "et": {
+            "n_estimators": 100,
+            "max_depth": 12,
+            "min_samples_split": 4,
+            "random_state": 42
+        },
+        "lr": {
+            "solver": "liblinear",
+            "C": 1.0,
+            "max_iter": 200
+        }
+    }
 }

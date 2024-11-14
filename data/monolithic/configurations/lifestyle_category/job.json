@@ -4,8 +4,8 @@
     "base_models": [
         "rf",
         "svm",
-        "nb",
-        "lr"
+        "lr",
+        "nb"
     ],
     "num_base_models_in_each_ensemble": 3,
     "num_ensembles": 2,
@@ -23,5 +23,27 @@
         "Gender",
         "Time Management Skill"
     ],
-    "feature_mapping_path": "data/monolithic/configurations/lifestyle_category/feature_mapping.csv"
+    "feature_mapping_path": "data/monolithic/configurations/lifestyle_category/feature_mapping.csv",
+    "model_params": {
+        "rf": {
+            "n_estimators": 80,
+            "max_depth": 8,
+            "min_samples_split": 4,
+            "random_state": 42
+        },
+        "svm": {
+            "C": 0.8,
+            "kernel": "rbf",
+            "gamma": "auto",
+            "probability": true,
+            "random_state": 42
+        },
+        "lr": {
+            "solver": "liblinear",
+            "C": 0.5,
+            "max_iter": 200
+        }
+    },
+    "ignore_pretrained": false,
+    "pretrained_ensemble_path": "data/monolithic/pretrained_ensembles/lifestyle_category"
 }

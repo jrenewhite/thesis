@@ -7,8 +7,8 @@
     "base_models": [
         "rf",
         "svm",
-        "nb",
-        "lr"
+        "et",
+        "knn"
     ],
     "num_base_models_in_each_ensemble": 3,
     "num_ensembles": 2,
@@ -29,5 +29,33 @@
     "results_folder": "data/monolithic/results/customer_segmentation",
     "use_feature_range": false,
     "feature_range": [],
-    "feature_mapping_path": "data/monolithic/configurations/customer_segmentation/feature_mapping.csv"
+    "feature_mapping_path": "data/monolithic/configurations/customer_segmentation/feature_mapping.csv",
+    "pretrained_ensemble_path": "data/monolithic/pretrained_ensembles/customer_segmentation",
+    "ignore_pretrained": false,
+    "model_params": {
+        "rf": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 4,
+            "random_state": 42
+        },
+        "svm": {
+            "C": 1.0,
+            "kernel": "linear",
+            "gamma": "scale",
+            "probability": true,
+            "random_state": 42
+        },
+        "et": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "knn": {
+            "n_neighbors": 5,
+            "weights": "uniform",
+            "algorithm": "auto"
+        }
+    }
 }

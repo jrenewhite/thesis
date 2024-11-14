@@ -8,7 +8,8 @@
         "rf",
         "svm",
         "nb",
-        "lr"
+        "lr",
+        "et"
     ],
     "num_base_models_in_each_ensemble": 3,
     "num_ensembles": 2,
@@ -26,5 +27,31 @@
         "id",
         "MTRANS"
     ],
-    "feature_mapping_path": "data/monolithic/configurations/obesity_risk/feature_mapping.csv"
+    "feature_mapping_path": "data/monolithic/configurations/obesity_risk/feature_mapping.csv",
+    "model_params": {
+        "rf": {
+            "n_estimators": 100,
+            "max_depth": 15,
+            "min_samples_split": 4,
+            "random_state": 42
+        },
+        "et": {
+            "n_estimators": 100,
+            "max_depth": 15,
+            "min_samples_split": 4,
+            "random_state": 42
+        },
+        "svm": {
+            "C": 1.0,
+            "kernel": "rbf",
+            "gamma": "scale",
+            "probability": true,
+            "random_state": 42
+        },
+        "lr": {
+            "solver": "liblinear",
+            "C": 0.7,
+            "max_iter": 200
+        }
+    }
 }

@@ -1,14 +1,12 @@
 {
-    "dataset_path": [
-        "data/datasets/lidar/dataset_1_training_test.csv",
-        "data/datasets/lidar/dataset_1_unlabeled_set.csv"
-    ],
-    "is_split": true,
+    "dataset_path": "data/datasets/lidar/dataset_1_training_test.csv",
+    "is_split": false,
     "base_models": [
         "rf",
         "svm",
         "nb",
-        "lr"
+        "lr",
+        "et"
     ],
     "num_base_models_in_each_ensemble": 3,
     "num_ensembles": 2,
@@ -41,5 +39,31 @@
         "zmean",
         "SP3"
     ],
-    "feature_mapping_path": "data/monolithic/configurations/lidar/feature_mapping.csv"
+    "feature_mapping_path": "data/monolithic/configurations/lidar/feature_mapping.csv",
+    "model_params": {
+        "rf": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "et": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "svm": {
+            "C": 1.0,
+            "kernel": "rbf",
+            "gamma": "scale",
+            "probability": true,
+            "random_state": 42
+        },
+        "lr": {
+            "solver": "liblinear",
+            "C": 1.0,
+            "max_iter": 200
+        }
+    }
 }

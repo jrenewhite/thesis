@@ -1,5 +1,5 @@
 import logging
-from sklearn.ensemble import RandomForestClassifier, VotingClassifier, ExtraTreesClassifier
+from sklearn.ensemble import RandomForestClassifier, ExtraTreesClassifier, GradientBoostingClassifier, VotingClassifier
 from sklearn.linear_model import LogisticRegression, PassiveAggressiveClassifier
 from sklearn.svm import SVC
 from sklearn.naive_bayes import GaussianNB, BernoulliNB
@@ -33,7 +33,8 @@ class ModelInitializer:
             'knn': KNeighborsClassifier(n_neighbors=5),
             'dt': DecisionTreeClassifier(random_state=42),
             'et': ExtraTreesClassifier(n_estimators=50, random_state=42, n_jobs=1),
-            'bnb': BernoulliNB()
+            'bnb': BernoulliNB(),
+            'gb': GradientBoostingClassifier(n_estimators=100, learning_rate=0.1, max_depth=3, random_state=42)
         }
 
         classifiers = {}

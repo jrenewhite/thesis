@@ -77,8 +77,11 @@ docker-compose.override.yml
 
 # Results and Data directories (ensure no sensitive data)
 data/monolithic/results/
+data/monolithic/pretrained_ensembles/
 data/distributed/results/
+data/distributed/pretrained_ensembles/
 results/
+pretrained_ensembles/
 
 # Logs and databases
 *.log
