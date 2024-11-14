@@ -20,7 +20,6 @@ class Trainer:
         self.logger.info("Trainer initialized with configuration and system configuration")
 
         # Set defaults for large dataset handling if not provided in the config
-
         self.large_dataset_threshold = self.config.get('large_dataset_threshold', 50000)
         self.sampling_ratio = self.config.get('sampling_ratio', 1.0)
 
@@ -83,9 +82,10 @@ class Trainer:
             for warning in w:
                 self.logger.warning(f"Warning captured during dataset loading: {warning.message}")
 
-        # Initialize classifiers
-        self.logger.info("Initializing classifiers")
-        classifiers = ModelInitializer.initialize_classifiers(self.config['base_models'])
+        # Initialize classifiers with optional model parameters
+        self.logger.info("Initializing classifiers with provided model parameters (if any)")
+        model_params = self.config.get('model_params', {})  # Retrieve model parameters if provided in config
+        classifiers = ModelInitializer.initialize_classifiers(self.config['base_models'], model_params=model_params)
         self.logger.debug("Classifiers initialized: %s", classifiers)
 
         # Create ensembles
@@ -102,6 +102,7 @@ class Trainer:
             with warnings.catch_warnings(record=True) as w:
                 warnings.simplefilter("always", DataConversionWarning)
                 ensemble.fit(X_train, y_train.values.ravel())  # Convert y_train to numpy and ravel it
+                self.logger.info("Trained ensemble: %s", [name for name, _ in ensemble.estimators])
 
                 # Log warnings encountered during ensemble training
                 for warning in w:

@@ -10,47 +10,57 @@ import random
 
 class ModelInitializer:
     @staticmethod
-    def initialize_classifiers(base_models):
+    def initialize_classifiers(base_models, model_params=None):
         """
-        Initialize classifiers based on the provided list of base model names.
+        Initialize classifiers based on provided model names and optional hyperparameters.
+        Defaults to standard parameters if none are provided in model_params.
 
         Args:
             base_models (list): List of strings specifying base model names.
+            model_params (dict): Optional dictionary of model-specific parameters.
 
         Returns:
             dict: Dictionary containing initialized classifier objects.
         """
         logging.info("Initializing classifiers for base models: %s", base_models)
 
-        # Available base models configured for multi-class classification and soft voting compatibility
-        available_models = {
+        # Define models with default parameters for multi-class and soft voting compatibility
+        default_models = {
             'rf': RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=1),
-            'svm': SVC(kernel='rbf', probability=True, random_state=42),  # Supports predict_proba
-            'lr': LogisticRegression(solver='liblinear', max_iter=1000, random_state=42),  # Supports predict_proba
-            'nb': GaussianNB(),  # Supports predict_proba
-            'knn': KNeighborsClassifier(n_neighbors=5),  # Supports predict_proba
-            'dt': DecisionTreeClassifier(random_state=42),  # Supports predict_proba
-            'et': ExtraTreesClassifier(n_estimators=50, random_state=42, n_jobs=1),  # Supports predict_proba
-            'bnb': BernoulliNB()  # Supports predict_proba
+            'svm': SVC(kernel='rbf', probability=True, random_state=42),
+            'lr': LogisticRegression(solver='liblinear', max_iter=1000, random_state=42),
+            'nb': GaussianNB(),
+            'knn': KNeighborsClassifier(n_neighbors=5),
+            'dt': DecisionTreeClassifier(random_state=42),
+            'et': ExtraTreesClassifier(n_estimators=50, random_state=42, n_jobs=1),
+            'bnb': BernoulliNB()
         }
 
-        # Validate base model names
-        if len(set(base_models)) != len(base_models):
-            logging.error("Base models contain duplicate entries.")
-            raise ValueError("Base models contain duplicate entries.")
-        if not all(model in available_models for model in base_models):
-            logging.error("Invalid base model name(s) specified.")
-            raise ValueError("Invalid base model name(s) specified.")
+        classifiers = {}
+        for model_name in base_models:
+            if model_name in default_models:
+                # Retrieve parameters from model_params if available, or use default
+                params = model_params.get(model_name, {}) if model_params else {}
+                try:
+                    # Merge default parameters with any provided in model_params
+                    classifiers[model_name] = type(default_models[model_name])(
+                        **{**default_models[model_name].get_params(), **params}
+                    )
+                    logging.info("Initialized model '%s' with parameters: %s", model_name, params)
+                except Exception as e:
+                    logging.error("Error initializing model '%s' with parameters %s: %s", model_name, params, e)
+                    raise
+            else:
+                logging.error("Model '%s' is not recognized in available models.", model_name)
+                raise ValueError(f"Model '{model_name}' is not recognized.")
 
-        # Initialize and return classifiers
-        classifiers = {model: available_models[model] for model in base_models}
-        logging.info("Classifiers initialized: %s", classifiers)
+        logging.info("Classifiers initialized successfully: %s", list(classifiers.keys()))
         return classifiers
 
     @staticmethod
     def create_ensembles(classifiers, num_base_models_in_each_ensemble, num_ensembles):
         """
-        Create ensembles using a combination of classifiers.
+        Create ensembles from combinations of classifiers for ensemble learning.
 
         Args:
             classifiers (dict): Dictionary containing initialized classifier objects.
@@ -60,32 +70,33 @@ class ModelInitializer:
         Returns:
             list: List of ensemble classifier objects.
         """
-        logging.info("Creating ensembles with %d base models per ensemble and %d ensembles", 
+        logging.info("Creating ensembles with %d base models per ensemble and %d total ensembles",
                      num_base_models_in_each_ensemble, num_ensembles)
 
-        # Validate number of base models in each ensemble
+        # Check that each ensemble has fewer models than total classifiers available
         if num_base_models_in_each_ensemble > len(classifiers):
-            logging.error("Number of base models in each ensemble cannot exceed the total number of classifiers.")
-            raise ValueError("Number of base models in each ensemble cannot exceed the total number of classifiers.")
+            logging.error("Number of base models per ensemble exceeds the total classifiers available.")
+            raise ValueError("Cannot create an ensemble with more base models than available classifiers.")
 
-        # Generate combinations of base models
+        # Generate all possible combinations of models for ensembles
         base_model_combinations = list(combinations(classifiers.keys(), num_base_models_in_each_ensemble))
 
         # Validate number of ensembles
         if num_ensembles > len(base_model_combinations):
-            logging.error("Number of ensembles cannot exceed the total number of possible base model combinations.")
-            raise ValueError("Number of ensembles cannot exceed the total number of possible base model combinations.")
+            logging.error("Requested number of ensembles exceeds possible combinations.")
+            raise ValueError("Cannot create more ensembles than the number of possible model combinations.")
 
-        # Select random combinations for ensembles
+        # Select random combinations to form each ensemble
         selected_combinations = random.sample(base_model_combinations, num_ensembles)
 
-        # Create ensembles using selected combinations
+        # Create VotingClassifier ensembles with selected combinations
         ensembles = []
         for combination in selected_combinations:
             logging.debug("Creating ensemble with combination: %s", combination)
             estimators = [(name, classifiers[name]) for name in combination]
             ensemble = VotingClassifier(estimators=estimators, voting='soft')
             ensembles.append(ensemble)
+            logging.info("Ensemble created with models: %s", [name for name, _ in estimators])
 
-        logging.info("Ensembles created successfully with %d ensembles", len(ensembles))
+        logging.info("Total ensembles created: %d", len(ensembles))
         return ensembles
