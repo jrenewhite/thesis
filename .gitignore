@@ -82,6 +82,7 @@ data/distributed/results/
 data/distributed/pretrained_ensembles/
 results/
 pretrained_ensembles/
+logs/
 
 # Logs and databases
 *.log

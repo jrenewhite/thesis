@@ -1,0 +1,64 @@
+{
+    "dataset_path": "data/datasets/wine/wine.data",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "lr",
+        "et"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 3,
+    "feature_names": [
+        "feature1",
+        "feature2",
+        "feature3",
+        "feature4",
+        "feature5",
+        "feature6",
+        "feature7",
+        "feature8",
+        "feature9",
+        "feature10",
+        "feature11",
+        "feature12",
+        "feature13"
+    ],
+    "target_col": "target",
+    "k": 5,
+    "results_folder": "data/distributed/results/wine",
+    "use_feature_range": false,
+    "feature_range": [
+        "feature1",
+        "feature13"
+    ],
+    "feature_mapping_path": "data/distributed/configurations/wine/feature_mapping.csv",
+    "pretrained_ensemble_path": "data/distributed/pretrained_ensembles/wine",
+    "ignore_pretrained": false,
+    "model_params": {
+        "rf": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "et": {
+            "n_estimators": 100,
+            "max_depth": 10,
+            "min_samples_split": 5,
+            "random_state": 42
+        },
+        "lr": {
+            "solver": "liblinear",
+            "C": 1.0,
+            "max_iter": 200
+        },
+        "svm": {
+            "C": 1.0,
+            "kernel": "rbf",
+            "gamma": "scale",
+            "probability": true,
+            "random_state": 42
+        }
+    }
+}

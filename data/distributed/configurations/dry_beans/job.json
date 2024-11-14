@@ -1,0 +1,13 @@
+{
+	"dataset_path": "Data/Dry Bean/Dry_Bean_Dataset.csv",
+	"is_split": false,
+	"base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":["Area","Perimeter","MajorAxisLength","MinorAxisLength","AspectRation","Eccentricity","ConvexArea","EquivDiameter","Extent","Solidity","roundness","Compactness","ShapeFactor1","ShapeFactor2","ShapeFactor3","ShapeFactor4"], 
+	"target_col": "target",
+	"k": 5,
+	"results_folder": "Results-Dry Bean Dataset",
+    "use_feature_range":false,
+	"feature_range":[],
+    "feature_mapping_path":"Configurations/Dry Bean/feature_mapping.csv"
+
+}

@@ -1,0 +1,12 @@
+{
+    "dataset_path": ["Data/Customer Segmentation/train.csv","Data/Customer Segmentation/test.csv"],
+    "is_split": true,
+    "base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":["ID","Gender","Ever_Married","Age","Graduated","Profession","Work_Experience","Spending_Score","Family_Size","Var_1"],  
+    "target_col": "target",
+    "k": 5,
+    "results_folder": "Results-Customer Segmentation Dataset",
+    "use_feature_range":false,
+    "feature_range":[],
+    "feature_mapping_path":"Configurations/Customer Segmentation/feature_mapping.csv"
+}

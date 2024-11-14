@@ -1,0 +1,4 @@
+feature_name,column_name,column_type,column_id
+target,label,numeric,
+pixel0,pixel0,numeric,
+pixel783,pixel783,numeric,

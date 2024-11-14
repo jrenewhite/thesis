@@ -1,0 +1,12 @@
+feature_name,column_name,column_type,column_id
+ID,ID,numeric,
+Gender,Gender,categorical,
+Ever_Married,Ever_Married,categorical,
+Age,Age,numeric,
+Graduated,Graduated,categorical,
+Profession,Profession,categorical,
+Work_Experience,Work_Experience,numeric,
+Spending_Score,Spending_Score,ordinal,
+Family_Size,Family_Size,numeric,
+Var_1,Var_1,categorical,
+target,Segmentation,categorical,

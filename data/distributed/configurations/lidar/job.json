@@ -1,0 +1,13 @@
+{
+	"dataset_path": ["Data/Lidar/dataset_1_training_test.csv","dataset_1_unlabeled_set.csv"],
+	"is_split": true,
+	"base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":["zmean","zsd","zskew","zkurt","zentropy","itot","imean","isd","iskew","ikurt","ipcumzq10","ipcumzq30","ipcumzq50","ipcumzq70","ipcumzq90","dtm","aspect","slope","SP3"], 
+	"target_col": "target",
+	"k": 5,
+	"results_folder": "Results-Lidar Dataset",
+    "use_feature_range":false,
+	"feature_range":["zmean","SP3"],
+    "feature_mapping_path":"Configurations/Lidar/feature_mapping.csv"
+
+}

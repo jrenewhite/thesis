@@ -1,0 +1,12 @@
+{
+    "dataset_path": "Data/Lifestyle Category/user_data.csv",
+    "is_split": false,
+    "base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":["feature1","feature2","feature3","feature4"],  
+    "target_col": "target",
+    "k": 5,
+    "results_folder": "Results-Lifestyle Category Dataset",
+    "use_feature_range":true,
+    "feature_range":["Gender","Time Management Skill"],
+    "feature_mapping_path":"Configurations/Lifestyle Category/feature_mapping.csv"
+}

@@ -1,0 +1,51 @@
+{
+    "dataset_path": "data/datasets/hospital_mortality/mimic3c.csv",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [
+        "hadm_id",
+        "gender",
+        "age",
+        "LOSdays",
+        "admit_type",
+        "admit_location",
+        "AdmitDiagnosis",
+        "insurance",
+        "religion",
+        "marital_status",
+        "ethnicity",
+        "NumCallouts",
+        "NumDiagnosis",
+        "NumProcs",
+        "AdmitProcedure",
+        "NumCPTevents",
+        "NumInput",
+        "NumLabs",
+        "NumMicroLabs",
+        "NumNotes",
+        "NumOutput",
+        "NumRx",
+        "NumProcEvents",
+        "NumTransfers",
+        "NumChartEvents",
+        "ExpiredHospital",
+        "TotalNumInteract",
+        "LOSgroupNum"
+    ],
+    "target_col": "ExpiredHospital",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/hospital_mortality",
+    "use_feature_range": false,
+    "feature_range": [
+        "hadm_id",
+        "LOSgroupNum"
+    ],
+    "feature_mapping_path": "data/monolithic/configurations/hospital_mortality/feature_mapping.csv"
+}

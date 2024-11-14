@@ -1,0 +1,3 @@
+services:
+  coordinator:
+    command: ["/app/data/distributed/configurations/customer_segmentation"]

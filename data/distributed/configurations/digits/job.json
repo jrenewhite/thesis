@@ -1,0 +1,12 @@
+{
+    "dataset_path": ["Data/Digit/train.csv","Data/Digit/test.csv"],
+    "is_split": true,
+    "base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":[],  
+    "target_col": "label",
+    "k": 5,
+    "results_folder": "Results-Digit Dataset",
+    "use_feature_range":true,
+    "feature_range":["pixel0","pixel783"],
+    "feature_mapping_path":"Configurations/Digit/feature_mapping.csv"
+}

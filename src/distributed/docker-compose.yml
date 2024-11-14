@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  coordinator:
+    build: ./coordinator
+    container_name: coordinator
+    environment:
+      - LOG_FILE_PATH=/app/logs/coordinator_app.log
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    networks:
+      - distributed-network
+
+  worker:
+    build: ./worker
+    environment:
+      - LOG_FILE_PATH=/app/logs/worker_app.log
+    volumes:
+      - ../data:/app/data
+      - ../logs:/app/logs
+    depends_on:
+      - coordinator
+    networks:
+      - distributed-network
+    deploy:
+      replicas: 3
+
+networks:
+  distributed-network:
+    driver: bridge

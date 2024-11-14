@@ -1,0 +1,14 @@
+{
+	"dataset_path": "Data/Iris/iris.data",
+	"is_split": false,
+	"base_models": ["rf", "svm", "nb", "lr"],
+    "feature_names":["feature1","feature2","feature3","feature4"], 
+	"target_col": "target",
+	"k": 5,
+	"results_folder": "Results-Iris Dataset",
+    "use_feature_range":false,
+    "feature_range":["feature1","feature4"],
+    "feature_mapping_path":"Configurations/Iris/feature_mapping.csv"
+
+}
+
