@@ -1,8 +1,10 @@
 import logging
-from sklearn.ensemble import RandomForestClassifier, VotingClassifier
-from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier, VotingClassifier, ExtraTreesClassifier
+from sklearn.linear_model import LogisticRegression, PassiveAggressiveClassifier
 from sklearn.svm import SVC
-from sklearn.naive_bayes import GaussianNB
+from sklearn.naive_bayes import GaussianNB, BernoulliNB
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.tree import DecisionTreeClassifier
 from itertools import combinations
 import random
 
@@ -20,12 +22,16 @@ class ModelInitializer:
         """
         logging.info("Initializing classifiers for base models: %s", base_models)
 
-        # Available base models
+        # Available base models configured for multi-class classification and soft voting compatibility
         available_models = {
             'rf': RandomForestClassifier(n_estimators=50, random_state=42, n_jobs=1),
-            'svm': SVC(kernel='rbf', probability=True, random_state=42),
-            'lr': LogisticRegression(solver='liblinear', max_iter=1000, random_state=42),
-            'nb': GaussianNB()
+            'svm': SVC(kernel='rbf', probability=True, random_state=42),  # Supports predict_proba
+            'lr': LogisticRegression(solver='liblinear', max_iter=1000, random_state=42),  # Supports predict_proba
+            'nb': GaussianNB(),  # Supports predict_proba
+            'knn': KNeighborsClassifier(n_neighbors=5),  # Supports predict_proba
+            'dt': DecisionTreeClassifier(random_state=42),  # Supports predict_proba
+            'et': ExtraTreesClassifier(n_estimators=50, random_state=42, n_jobs=1),  # Supports predict_proba
+            'bnb': BernoulliNB()  # Supports predict_proba
         }
 
         # Validate base model names
@@ -40,7 +46,7 @@ class ModelInitializer:
         classifiers = {model: available_models[model] for model in base_models}
         logging.info("Classifiers initialized: %s", classifiers)
         return classifiers
-    
+
     @staticmethod
     def create_ensembles(classifiers, num_base_models_in_each_ensemble, num_ensembles):
         """
