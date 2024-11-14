@@ -64,7 +64,7 @@ coverage.xml
 # Docker
 *.log
 docker-compose.override.yml
-**/Dockerfile
+
 
 # Visual Studio Code
 .vscode/
