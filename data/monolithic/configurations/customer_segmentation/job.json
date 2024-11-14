@@ -1,0 +1,33 @@
+{
+    "dataset_path": [
+        "data/datasets/customer_segmentation/train.csv",
+        "data/datasets/customer_segmentation/test.csv"
+    ],
+    "is_split": true,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [
+        "ID",
+        "Gender",
+        "Ever_Married",
+        "Age",
+        "Graduated",
+        "Profession",
+        "Work_Experience",
+        "Spending_Score",
+        "Family_Size",
+        "Var_1"
+    ],
+    "target_col": "target",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/customer_segmentation",
+    "use_feature_range": false,
+    "feature_range": [],
+    "feature_mapping_path": "data/monolithic/configurations/customer_segmentation/feature_mapping.csv"
+}

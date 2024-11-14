@@ -1,0 +1,27 @@
+{
+    "dataset_path": "data/datasets/lifestyle_category/user_data.csv",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [
+        "feature1",
+        "feature2",
+        "feature3",
+        "feature4"
+    ],
+    "target_col": "Lifestyle Choice",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/lifestyle_category",
+    "use_feature_range": true,
+    "feature_range": [
+        "Gender",
+        "Time Management Skill"
+    ],
+    "feature_mapping_path": "data/monolithic/configurations/lifestyle_category/feature_mapping.csv"
+}

@@ -8,6 +8,7 @@ This project implements ensemble learning models in Python, including training, 
 ## Repository
 
 To clone this project:
+
 ```sh
 git clone https://github.com/jrenewhite/thesis.git
 cd thesis
@@ -24,6 +25,7 @@ The monolithic solution is designed to combine multiple machine learning models 
 ### Installation (Non-Docker Version)
 
 1. **Set Up the Environment**:
+
    ```sh
    python -m venv env
    source env/bin/activate  # For Linux/macOS
@@ -31,27 +33,31 @@ The monolithic solution is designed to combine multiple machine learning models 
    ```
 
 2. **Install Dependencies**:
+
    ```sh
    pip install -r requirements.txt
    ```
 
 3. **Run the Main Script**:
+
    ```sh
    python src/main.py <config_directory>
    # Example:
-   python src/main.py data/monolitic/configurations/wine/
+   python src/main.py data/monolithic/configurations/wine/
    ```
 
 ### Installation and Usage (Docker Version)
 
 1. **Build the Docker Image**:
+
    ```sh
    docker build -t ensemble-monolithic .
    ```
 
 2. **Run the Docker Container with Specific Configuration**:
+
    ```sh
-   docker run --rm -v "$(pwd)/data:/app/data" -v "$(pwd)/results:/app/data/monolitic/results" ensemble-monolithic data/monolitic/configurations/wine
+   docker run --rm -v "$(pwd)/data:/app/data" -v "$(pwd)/results:/app/data/monolithic/results" ensemble-monolithic data/monolithic/configurations/wine
    ```
 
 ### Configuration Files
@@ -60,6 +66,7 @@ The monolithic solution is designed to combine multiple machine learning models 
 - **`job.json`**: Specifies dataset paths, base models, split ratios, and output locations for each experiment.
 
 **Example `job.json`**:
+
 ```json
 {
     "dataset_path": "data/datasets/wine/wine.data",
@@ -70,7 +77,7 @@ The monolithic solution is designed to combine multiple machine learning models 
     "feature_names": ["feature1", "feature2", ...],
     "target_col": "target",
     "split_ratio": 0.2,
-    "results_folder": "data/monolitic/results/wine"
+    "results_folder": "data/monolithic/results/wine"
 }
 ```
 
@@ -80,8 +87,8 @@ The monolithic solution is designed to combine multiple machine learning models 
 - **`src/trainer.py`**: Manages the training process for individual models and ensembles.
 - **`src/metrics_evaluator.py`**: Calculates performance metrics like accuracy, precision, recall, and F1-score.
 - **`src/plotter.py`**: Generates latency and sample count visualizations.
-- **`data/monolitic/configurations`**: Contains configurations for various datasets.
-- **`data/monolitic/results`**: Stores output results for different datasets, including performance metrics and plots.
+- **`data/monolithic/configurations`**: Contains configurations for various datasets.
+- **`data/monolithic/results`**: Stores output results for different datasets, including performance metrics and plots.
 
 ---
 
@@ -91,15 +98,15 @@ The distributed solution enables deployment across multiple machines or Docker c
 
 ### Deployment on Multiple Physical Machines
 
-1. **Set Up Machines**: 
+1. **Set Up Machines**:
    - Designate one machine as the **client** (or "organizer") and others as **workers**.
    - Place the code and configurations on each machine according to their roles (refer to `src/distributed/Client Machine` and `src/distributed/Worker Machine` for details).
 
-2. **Configure Connection Details**: 
+2. **Configure Connection Details**:
    - Update the client machine’s configuration to include IP addresses or hostnames of each worker machine.
    - Each worker should run `server.py` to listen for tasks from the client.
 
-3. **Run the Client and Workers**: 
+3. **Run the Client and Workers**:
    - Start the workers by running their `server.py` script.
    - Start the client machine’s `main.py`, specifying the worker addresses as needed.
 
@@ -110,8 +117,9 @@ The distributed solution enables deployment across multiple machines or Docker c
 To simulate a distributed setup on a single machine with enough resources, you can create a Docker network with multiple containers, each representing a worker or client.
 
 1. **Docker Compose File**: Use the `docker-compose.yml` to configure a client and multiple worker services.
-   
+
 2. **Sample `docker-compose.yml`**:
+
    ```yaml
    version: '3.8'
 
@@ -149,12 +157,14 @@ To simulate a distributed setup on a single machine with enough resources, you c
    ```
 
 3. **Build and Run with Docker Compose**:
+
    ```sh
    docker-compose up --build
    ```
 
 4. **Scaling Workers**:
    To add more worker containers, you can add more `workerN` services to `docker-compose.yml` or scale directly with:
+
    ```sh
    docker-compose up --scale worker=4  # Replace 4 with the desired number of workers
    ```
@@ -170,6 +180,7 @@ To simulate a distributed setup on a single machine with enough resources, you c
 ## Requirements
 
 Dependencies are listed in `requirements.txt`, including libraries like `scikit-learn`, `pandas`, and `seaborn`. To install:
+
 ```sh
 pip install -r requirements.txt
 ```

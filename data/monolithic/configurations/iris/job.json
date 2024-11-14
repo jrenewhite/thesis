@@ -1,0 +1,27 @@
+{
+    "dataset_path": "data/datasets/iris/iris.data",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [
+        "feature1",
+        "feature2",
+        "feature3",
+        "feature4"
+    ],
+    "target_col": "target",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/iris",
+    "use_feature_range": false,
+    "feature_range": [
+        "feature1",
+        "feature4"
+    ],
+    "feature_mapping_path": "data/monolithic/configurations/iris/feature_mapping.csv"
+}

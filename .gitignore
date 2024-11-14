@@ -76,7 +76,7 @@ docker-compose.override.yml
 .DS_Store
 
 # Results and Data directories (ensure no sensitive data)
-data/monolitic/results/
+data/monolithic/results/
 data/distributed/results/
 results/
 

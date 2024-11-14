@@ -1,0 +1,36 @@
+{
+    "dataset_path": "data/datasets/dry_beans/Dry_Bean_Dataset.csv",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [
+        "Area",
+        "Perimeter",
+        "MajorAxisLength",
+        "MinorAxisLength",
+        "AspectRation",
+        "Eccentricity",
+        "ConvexArea",
+        "EquivDiameter",
+        "Extent",
+        "Solidity",
+        "roundness",
+        "Compactness",
+        "ShapeFactor1",
+        "ShapeFactor2",
+        "ShapeFactor3",
+        "ShapeFactor4"
+    ],
+    "target_col": "Class",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/dry_beans",
+    "use_feature_range": false,
+    "feature_range": [],
+    "feature_mapping_path": "data/monolithic/configurations/dry_beans/feature_mapping.csv"
+}

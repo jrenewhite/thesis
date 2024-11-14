@@ -1,0 +1,15 @@
+feature_name,column_name,column_type,column_id
+target,,numeric,0
+feature1,,numeric,1
+feature2,,numeric,2
+feature3,,numeric,3
+feature4,,numeric,4
+feature5,,numeric,5
+feature6,,numeric,6
+feature7,,numeric,7
+feature8,,numeric,8
+feature9,,numeric,9
+feature10,,numeric,10
+feature11,,numeric,11
+feature12,,numeric,12
+feature13,,numeric,13

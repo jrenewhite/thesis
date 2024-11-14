@@ -1,0 +1,22 @@
+{
+    "dataset_path": "data/datasets/digits/train.csv",
+    "is_split": false,
+    "base_models": [
+        "rf",
+        "svm",
+        "nb",
+        "lr"
+    ],
+    "num_base_models_in_each_ensemble": 3,
+    "num_ensembles": 2,
+    "feature_names": [],
+    "target_col": "label",
+    "split_ratio": 0.2,
+    "results_folder": "data/monolithic/results/digits",
+    "use_feature_range": true,
+    "feature_range": [
+        "pixel0",
+        "pixel783"
+    ],
+    "feature_mapping_path": "data/monolithic/configurations/digits/feature_mapping.csv"
+}

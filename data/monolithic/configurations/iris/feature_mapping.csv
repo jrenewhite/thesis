@@ -1,0 +1,6 @@
+feature_name,column_name,column_type,column_id
+feature1,,numeric,0
+feature2,,numeric,1
+feature3,,numeric,2
+feature4,,numeric,3
+target,,categorical,4
